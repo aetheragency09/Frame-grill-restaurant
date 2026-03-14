@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flame Grill — Fine Dining Excellence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+:root{
+  --ink:#0C0A07;--ink2:#161210;--ink3:#1E1A14;--ink4:#27231C;--ink5:#312C24;
+  --gold:#C8A45A;--goldhi:#E2C07A;--goldlo:#8A6E38;
+  --sand:#F2E8D4;--sand2:#D9CBAE;--muted:#8C8070;--danger:#B84040;
+  --easeOut:cubic-bezier(0.16,1,0.3,1);--easeIO:cubic-bezier(0.76,0,0.24,1);
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:var(--goldlo)}
+body{background:var(--ink);color:var(--sand2);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+/* UTILS */
+.wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,80px)}
+section{padding:clamp(80px,12vw,140px) 0;position:relative}
+.lbl{font-size:10px;letter-spacing:.25em;text-transform:uppercase;font-weight:500;color:var(--gold);display:flex;align-items:center;gap:12px}
+.lbl::before{content:'';flex-shrink:0;width:32px;height:1px;background:var(--gold)}
+.t2{font-family:'DM Serif Display',serif;font-size:clamp(34px,5vw,62px);line-height:1;color:var(--sand);margin-top:14px}
+.t3{font-family:'DM Serif Display',serif;font-size:clamp(20px,2.5vw,28px);line-height:1.1;color:var(--sand)}
+.body{font-size:15px;line-height:1.8;color:var(--muted);font-weight:300}
+em{color:var(--gold);font-style:normal}
+
+/* REVEAL */
+[data-r]{opacity:0;transform:translateY(36px);transition:opacity .9s var(--easeOut),transform .9s var(--easeOut)}
+[data-r].in{opacity:1;transform:none}
+[data-r="rx"]{transform:translateX(48px)}
+[data-r="rx"].in{transform:none}
+[data-r="lx"]{transform:translateX(-48px)}
+[data-r="lx"].in{transform:none}
+[data-r="sc"]{transform:scale(.93)}
+[data-r="sc"].in{transform:none}
+[data-sg]>*{opacity:0;transform:translateY(28px);transition:opacity .7s var(--easeOut),transform .7s var(--easeOut)}
+[data-sg].in>*:nth-child(1){opacity:1;transform:none;transition-delay:.06s}
+[data-sg].in>*:nth-child(2){opacity:1;transform:none;transition-delay:.14s}
+[data-sg].in>*:nth-child(3){opacity:1;transform:none;transition-delay:.22s}
+[data-sg].in>*:nth-child(4){opacity:1;transform:none;transition-delay:.30s}
+[data-sg].in>*:nth-child(5){opacity:1;transform:none;transition-delay:.38s}
+[data-sg].in>*:nth-child(6){opacity:1;transform:none;transition-delay:.46s}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;outline:none;transition:all .35s var(--easeOut);white-space:nowrap}
+.bg{background:var(--gold);color:var(--ink);padding:15px 34px}
+.bg:hover{background:var(--goldhi);transform:translateY(-2px);box-shadow:0 16px 40px rgba(200,164,90,.25)}
+.bgh{background:transparent;color:var(--sand);border:1px solid rgba(242,232,212,.2);padding:15px 34px}
+.bgh:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.bsm{background:transparent;color:var(--gold);border:1px solid rgba(200,164,90,.3);font-size:10px;padding:7px 16px}
+.bsm:hover{background:var(--gold);color:var(--ink)}
+
+/* ═══ NAVBAR ═══ */
+#nav{position:fixed;inset:0 0 auto;z-index:900;padding:26px clamp(20px,5vw,80px);display:flex;align-items:center;justify-content:space-between;transition:padding .5s var(--easeOut),background .5s,backdrop-filter .5s}
+#nav.st{padding:14px clamp(20px,5vw,80px);background:rgba(12,10,7,.9);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid rgba(200,164,90,.1)}
+.navlogo{font-family:'DM Serif Display',serif;font-size:21px;color:var(--gold);text-decoration:none;display:flex;flex-direction:column;line-height:1}
+.navlogo small{font-family:'Outfit',sans-serif;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:400}
+.navlinks{display:flex;gap:34px;list-style:none;align-items:center}
+.navlinks a{color:var(--sand2);text-decoration:none;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:400;transition:color .3s;position:relative}
+.navlinks a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .35s var(--easeOut)}
+.navlinks a:hover{color:var(--gold)}
+.navlinks a:hover::after{width:100%}
+.hbg{display:none;flex-direction:column;gap:6px;cursor:pointer;padding:4px}
+.hbg span{display:block;height:1px;background:var(--sand);transition:all .35s var(--easeOut)}
+.hbg span:nth-child(1){width:28px}
+.hbg span:nth-child(2){width:20px}
+.hbg span:nth-child(3){width:24px}
+.hbg.op span:nth-child(1){width:24px;transform:translateY(7px) rotate(45deg)}
+.hbg.op span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hbg.op span:nth-child(3){width:24px;transform:translateY(-7px) rotate(-45deg)}
+.drawer{position:fixed;inset:0 0 0 auto;z-index:890;width:min(310px,85vw);background:var(--ink3);border-left:1px solid rgba(200,164,90,.12);transform:translateX(100%);transition:transform .5s var(--easeOut);display:flex;flex-direction:column;padding:96px 40px 50px;gap:0}
+.drawer.op{transform:none}
+.drawer .navlinks{flex-direction:column;gap:0;align-items:flex-start}
+.drawer .navlinks li{width:100%;border-bottom:1px solid rgba(200,164,90,.07)}
+.drawer .navlinks a{display:block;padding:17px 0;font-size:13px}
+.drawer .btn{margin-top:34px;justify-content:center}
+.scrim{position:fixed;inset:0;z-index:880;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .4s}
+.scrim.sh{opacity:1;pointer-events:all}
+
+/* ═══ HERO ═══ */
+#hero{height:100svh;min-height:640px;display:grid;place-items:center;overflow:hidden}
+.hbg-slides{position:absolute;inset:0}
+.hslide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.8s ease}
+.hslide.on{opacity:1}
+.hslide::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(12,10,7,.84) 0%,rgba(12,10,7,.38) 60%,rgba(12,10,7,.6) 100%),linear-gradient(to top,rgba(12,10,7,.88) 0%,transparent 52%)}
+.hbody{position:relative;z-index:2;max-width:820px;padding:0 clamp(20px,5vw,80px)}
+.heyebrow{display:flex;align-items:center;gap:14px;margin-bottom:28px;animation:fu .9s .2s both}
+.heyebrow .lbl{margin:0}
+.hh1{font-family:'DM Serif Display',serif;font-size:clamp(50px,9.5vw,112px);line-height:.93;color:var(--sand);margin-bottom:28px;animation:fu .9s .4s both}
+.hh1 i{font-style:italic;color:var(--gold)}
+.hsub{font-size:clamp(14px,1.6vw,17px);color:var(--muted);line-height:1.7;font-weight:300;max-width:440px;margin-bottom:48px;animation:fu .9s .6s both}
+.hcta{display:flex;gap:16px;flex-wrap:wrap;animation:fu .9s .8s both}
+.hstats{position:absolute;bottom:0;left:0;right:0;z-index:2;display:flex;border-top:1px solid rgba(200,164,90,.12);animation:fu .9s 1s both}
+.hstat{flex:1;padding:clamp(16px,2.5vw,26px) clamp(16px,3vw,40px);border-right:1px solid rgba(200,164,90,.12);display:flex;flex-direction:column;gap:4px;background:rgba(12,10,7,.52);backdrop-filter:blur(12px)}
+.hstat:last-child{border-right:none}
+.hstat .n{font-family:'DM Serif Display',serif;font-size:clamp(24px,3.5vw,40px);color:var(--gold);line-height:1}
+.hstat .l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.hdots{position:absolute;right:clamp(20px,5vw,80px);top:50%;transform:translateY(-50%);z-index:3;display:flex;flex-direction:column;gap:10px}
+.hdot{width:2px;height:24px;background:rgba(200,164,90,.3);cursor:pointer;transition:all .35s;border:none;outline:none}
+.hdot.on{background:var(--gold);height:44px}
+@keyframes fu{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+
+/* ═══ SPECIALS ═══ */
+#specials{background:var(--ink2)}
+.sphd{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(40px,6vw,72px)}
+.spgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:clamp(12px,2vw,20px)}
+.spcard{background:var(--ink3);border:1px solid rgba(200,164,90,.08);overflow:hidden;cursor:pointer;transition:transform .45s var(--easeOut),border-color .35s,box-shadow .45s var(--easeOut);position:relative}
+.spcard:hover{transform:translateY(-10px);border-color:rgba(200,164,90,.35);box-shadow:0 28px 70px rgba(0,0,0,.5)}
+.spbadge{position:absolute;top:14px;left:14px;z-index:2;background:var(--danger);color:#fff;font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 10px}
+.spimg{aspect-ratio:4/3;overflow:hidden}
+.spimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s var(--easeOut)}
+.spcard:hover .spimg img{transform:scale(1.07)}
+.spbody{padding:clamp(16px,2vw,24px)}
+.spname{font-family:'DM Serif Display',serif;font-size:clamp(16px,1.8vw,20px);color:var(--sand);margin-bottom:8px}
+.spdesc{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:16px}
+.spprices{display:flex;align-items:baseline;gap:10px}
+.spold{font-size:12px;color:var(--muted);text-decoration:line-through}
+.spsale{font-family:'DM Serif Display',serif;font-size:26px;color:var(--gold);line-height:1}
+
+/* ═══ MENU ═══ */
+#menu{background:var(--ink)}
+.mtabs{display:flex;gap:0;flex-wrap:wrap;border-bottom:1px solid rgba(200,164,90,.12);margin-bottom:clamp(30px,5vw,54px)}
+.mtab{padding:14px 26px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;transition:color .3s;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.mtab.on{color:var(--gold);border-bottom-color:var(--gold)}
+.mtab:hover:not(.on){color:var(--sand2)}
+.mgrid{display:none}
+.mgrid.on{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2px}
+.mi{display:flex;gap:20px;padding:clamp(18px,2.5vw,28px);background:var(--ink2);border:1px solid transparent;cursor:pointer;transition:background .3s,border-color .3s;align-items:flex-start}
+.mi:hover{background:var(--ink3);border-color:rgba(200,164,90,.18)}
+.mithumb{flex-shrink:0;width:88px;height:88px;overflow:hidden}
+.mithumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--easeOut)}
+.mi:hover .mithumb img{transform:scale(1.1)}
+.miinfo{flex:1;min-width:0}
+.miname{font-family:'DM Serif Display',serif;font-size:clamp(15px,1.5vw,18px);color:var(--sand);margin-bottom:6px;line-height:1.2}
+.midesc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.mifoot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.miprice{font-family:'DM Serif Display',serif;font-size:20px;color:var(--gold)}
+
+/* ═══ TEAM ═══ */
+#team{background:var(--ink2);overflow:hidden}
+.teambg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'DM Serif Display',serif;font-size:clamp(100px,18vw,260px);color:rgba(200,164,90,.025);white-space:nowrap;pointer-events:none;letter-spacing:-.02em}
+.teamgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:clamp(20px,3vw,32px)}
+.chef{display:flex;flex-direction:column}
+.chefframe{aspect-ratio:3/4;overflow:hidden;position:relative;margin-bottom:24px}
+.chefframe img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(30%);transition:transform .7s var(--easeOut),filter .5s}
+.chef:hover .chefframe img{transform:scale(1.04);filter:grayscale(0%)}
+.chefframe::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,7,.75) 0%,transparent 55%)}
+.chefnum{font-size:11px;color:var(--goldlo);letter-spacing:.2em;margin-bottom:6px}
+.chefname{font-family:'DM Serif Display',serif;font-size:clamp(20px,2vw,24px);color:var(--sand);margin-bottom:4px}
+.chefrole{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.chefbio{font-size:13px;color:var(--muted);line-height:1.75}
+
+/* ═══ GALLERY ═══ */
+#gallery{background:var(--ink)}
+.gmosaic{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:180px;gap:6px}
+.gmosaic .gi:nth-child(1){grid-column:span 5;grid-row:span 2}
+.gmosaic .gi:nth-child(2){grid-column:span 4;grid-row:span 1}
+.gmosaic .gi:nth-child(3){grid-column:span 3;grid-row:span 1}
+.gmosaic .gi:nth-child(4){grid-column:span 4;grid-row:span 1}
+.gmosaic .gi:nth-child(5){grid-column:span 3;grid-row:span 1}
+.gmosaic .gi:nth-child(6){grid-column:span 4;grid-row:span 1}
+.gmosaic .gi:nth-child(7){grid-column:span 3;grid-row:span 2}
+.gmosaic .gi:nth-child(8){grid-column:span 3;grid-row:span 1}
+.gmosaic .gi:nth-child(9){grid-column:span 3;grid-row:span 1}
+.gmosaic .gi:nth-child(10){grid-column:span 3;grid-row:span 1}
+.gmosaic .gi:nth-child(11){grid-column:span 3;grid-row:span 1}
+.gmosaic .gi:nth-child(12){grid-column:span 3;grid-row:span 1}
+.gi{overflow:hidden;cursor:pointer;position:relative}
+.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s var(--easeOut)}
+.gi:hover img{transform:scale(1.08)}
+.giveil{position:absolute;inset:0;background:rgba(12,10,7,0);display:flex;align-items:center;justify-content:center;transition:background .35s}
+.gi:hover .giveil{background:rgba(12,10,7,.42)}
+.giicon{color:var(--gold);font-size:24px;font-weight:200;opacity:0;transform:scale(.6);transition:all .35s var(--easeOut)}
+.gi:hover .giicon{opacity:1;transform:none}
+
+/* ═══ REVIEWS ═══ */
+#reviews{background:var(--ink3)}
+.rvgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:clamp(16px,2.5vw,28px)}
+.rv{background:var(--ink4);border:1px solid rgba(200,164,90,.07);padding:clamp(28px,4vw,44px);display:flex;flex-direction:column;gap:20px;transition:border-color .35s,transform .4s var(--easeOut)}
+.rv:hover{border-color:rgba(200,164,90,.22);transform:translateY(-6px)}
+.rvstars{color:var(--gold);font-size:13px;letter-spacing:4px}
+.rvq{font-family:'DM Serif Display',serif;font-size:clamp(15px,1.6vw,17px);color:var(--sand2);line-height:1.8;font-style:italic;flex:1}
+.rva{display:flex;align-items:center;gap:14px}
+.rva img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid rgba(200,164,90,.3);flex-shrink:0}
+.rvaname{font-size:14px;font-weight:500;color:var(--sand)}
+.rvarole{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* ═══ ABOUT ═══ */
+#about{background:var(--ink2)}
+.ablayout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px);align-items:center}
+.abcollage{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.abimg{overflow:hidden;cursor:pointer;position:relative}
+.abimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s var(--easeOut)}
+.abimg:hover img{transform:scale(1.05)}
+.abimg:first-child{grid-column:span 2;aspect-ratio:16/9}
+.abimg:not(:first-child){aspect-ratio:1}
+.abimg::after{content:'';position:absolute;inset:0;background:rgba(12,10,7,0);transition:background .35s}
+.abimg:hover::after{background:rgba(200,164,90,.06)}
+.abstats{display:flex;gap:clamp(22px,4vw,48px);margin-top:40px;padding-top:36px;border-top:1px solid rgba(200,164,90,.12)}
+.astat .n{font-family:'DM Serif Display',serif;font-size:clamp(36px,4vw,52px);color:var(--gold);line-height:1}
+.astat .l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+/* ═══ CONTACT ═══ */
+#contact{background:var(--ink)}
+.clayout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px)}
+.citem{display:flex;align-items:flex-start;gap:18px;margin-bottom:28px}
+.cicon{width:44px;height:44px;flex-shrink:0;border:1px solid rgba(200,164,90,.2);display:flex;align-items:center;justify-content:center;font-size:16px;transition:background .3s}
+.citem:hover .cicon{background:rgba(200,164,90,.1)}
+.clabel{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.cval{font-size:14px;color:var(--sand2);line-height:1.6}
+.cval a{color:inherit;text-decoration:none;transition:color .3s}
+.cval a:hover{color:var(--gold)}
+.mapbox{margin-top:32px;border:1px solid rgba(200,164,90,.1);overflow:hidden}
+.mapbox iframe{display:block;width:100%;height:220px;filter:grayscale(100%) brightness(70%) contrast(110%)}
+.formbox{background:var(--ink2);border:1px solid rgba(200,164,90,.1);padding:clamp(28px,5vw,52px)}
+.fg{margin-bottom:20px}
+.fg label{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:500}
+.fg input,.fg textarea,.fg select{width:100%;background:var(--ink3);border:1px solid rgba(200,164,90,.12);color:var(--sand2);padding:14px 18px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;outline:none;transition:border-color .3s,box-shadow .3s;appearance:none}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:rgba(200,164,90,.5);box-shadow:0 0 0 3px rgba(200,164,90,.07)}
+.fg textarea{resize:vertical;min-height:110px}
+.fgrow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bsub{width:100%;background:var(--gold);color:var(--ink);border:none;padding:17px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .35s var(--easeOut);margin-top:8px}
+.bsub:hover{background:var(--goldhi);transform:translateY(-2px);box-shadow:0 12px 40px rgba(200,164,90,.2)}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--ink);border-top:1px solid rgba(200,164,90,.08);padding:clamp(56px,8vw,96px) clamp(20px,5vw,80px) clamp(28px,4vw,40px)}
+.ftmain{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:clamp(30px,5vw,64px);margin-bottom:56px}
+.ftlogo{font-family:'DM Serif Display',serif;font-size:28px;color:var(--gold);margin-bottom:16px;display:block}
+.ftdesc{font-size:13px;color:var(--muted);line-height:1.8;max-width:260px;margin-bottom:28px}
+.ftsocials{display:flex;gap:10px}
+.ftsoc{width:38px;height:38px;border:1px solid rgba(200,164,90,.18);display:flex;align-items:center;justify-content:center;color:var(--gold);text-decoration:none;font-size:13px;font-weight:500;transition:all .3s}
+.ftsoc:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.fth{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;font-weight:500}
+.ftlinks{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ftlinks a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .3s}
+.ftlinks a:hover{color:var(--sand)}
+.ftbar{padding-top:28px;border-top:1px solid rgba(200,164,90,.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.ftbar p{font-size:12px;color:var(--muted)}
+.ftbar span{color:var(--gold)}
+
+/* ═══ LIGHTBOX ═══ */
+#lb{position:fixed;inset:0;z-index:9000;background:rgba(6,4,2,.97);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s}
+#lb.sh{opacity:1;pointer-events:all}
+.lbinner{position:relative;max-width:90vw;transform:scale(.93);transition:transform .45s var(--easeOut)}
+#lb.sh .lbinner{transform:none}
+#lbimg{display:block;max-width:90vw;max-height:82vh;object-fit:contain;border:1px solid rgba(200,164,90,.15)}
+#lbcap{margin-top:16px;text-align:center;font-family:'DM Serif Display',serif;font-style:italic;font-size:16px;color:var(--muted)}
+.lbclose{position:absolute;top:-52px;right:0;width:44px;height:44px;background:none;border:1px solid rgba(200,164,90,.25);color:var(--gold);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.lbclose:hover{background:var(--gold);color:var(--ink)}
+
+/* ═══ MODAL ═══ */
+#modal{position:fixed;inset:0;z-index:8000;background:rgba(6,4,2,.93);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s;padding:20px}
+#modal.sh{opacity:1;pointer-events:all}
+.mbox{background:var(--ink3);border:1px solid rgba(200,164,90,.18);padding:clamp(32px,5vw,56px);max-width:520px;width:100%;position:relative;transform:translateY(30px);transition:transform .5s var(--easeOut)}
+#modal.sh .mbox{transform:none}
+.mclose{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1;transition:color .3s}
+.mclose:hover{color:var(--gold)}
+
+/* ═══ WA FAB ═══ */
+.wafab{position:fixed;bottom:32px;right:32px;z-index:800;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 8px 32px rgba(37,211,102,.35);transition:transform .35s var(--easeOut),box-shadow .35s;animation:wap 3s ease-in-out infinite}
+.wafab:hover{transform:scale(1.12);box-shadow:0 14px 44px rgba(37,211,102,.5);animation:none}
+.wafab svg{width:28px;height:28px;fill:#fff}
+@keyframes wap{0%,100%{box-shadow:0 8px 32px rgba(37,211,102,.35)}50%{box-shadow:0 8px 48px rgba(37,211,102,.6),0 0 0 8px rgba(37,211,102,.1)}}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1100px){
+  .ablayout{grid-template-columns:1fr}
+  .abcollage{grid-template-columns:1fr 1fr}
+  .abimg:first-child{aspect-ratio:16/7}
+  .ftmain{grid-template-columns:1fr 1fr}
+  .hstats{display:grid;grid-template-columns:repeat(3,1fr)}
+  .hstat:last-child{border-right:1px solid rgba(200,164,90,.12)}
+  .gmosaic{grid-template-columns:repeat(3,1fr);grid-auto-rows:200px}
+  .gmosaic .gi{grid-column:span 1!important;grid-row:span 1!important}
+}
+@media(max-width:768px){
+  .navlinks,#nav>.btn{display:none}
+  .hbg{display:flex}
+  .hdots{display:none}
+  .hstats{grid-template-columns:1fr 1fr}
+  .hstat:nth-child(3){grid-column:span 2;border-top:1px solid rgba(200,164,90,.12);border-right:none}
+  .sphd{flex-direction:column;align-items:flex-start}
+  .spgrid{grid-template-columns:1fr 1fr}
+  .clayout{grid-template-columns:1fr}
+  .ftmain{grid-template-columns:1fr;gap:32px}
+  .gmosaic{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}
+  .abstats{flex-wrap:wrap;gap:20px 36px}
+  .wafab{bottom:20px;right:20px;width:52px;height:52px}
+  .wafab svg{width:24px;height:24px}
+}
+@media(max-width:520px){
+  .spgrid{grid-template-columns:1fr}
+  .mgrid.on{grid-template-columns:1fr}
+  .rvgrid{grid-template-columns:1fr}
+  .teamgrid{grid-template-columns:1fr 1fr}
+  .gmosaic{grid-template-columns:1fr 1fr;grid-auto-rows:130px}
+  .fgrow{grid-template-columns:1fr}
+  .hstats{display:none}
+  .hcta{flex-direction:column}
+  .hcta .btn{justify-content:center}
+}
+@media(max-width:380px){.teamgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <a href="#" class="navlogo">Flame Grill<small>Fine Dining Restaurant</small></a>
+  <ul class="navlinks">
+    <li><a href="#specials">Specials</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#team">Chefs</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="btn bg" onclick="openModal()" style="padding:12px 26px;font-size:10px">Reserve Table</button>
+  <div class="hbg" id="hbg" onclick="toggleDrawer()"><span></span><span></span><span></span></div>
+</nav>
+<div class="scrim" id="scrim" onclick="closeDrawer()"></div>
+<nav class="drawer" id="drawer">
+  <ul class="navlinks">
+    <li><a href="#specials" onclick="closeDrawer()">Specials</a></li>
+    <li><a href="#menu" onclick="closeDrawer()">Menu</a></li>
+    <li><a href="#team" onclick="closeDrawer()">Our Chefs</a></li>
+    <li><a href="#gallery" onclick="closeDrawer()">Gallery</a></li>
+    <li><a href="#about" onclick="closeDrawer()">About</a></li>
+    <li><a href="#contact" onclick="closeDrawer()">Contact</a></li>
+  </ul>
+  <button class="btn bg" onclick="openModal();closeDrawer()">Reserve a Table</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hbg-slides">
+    <div class="hslide on" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=85')"></div>
+    <div class="hslide" style="background-image:url('https://images.unsplash.com/photo-1558030006-450675393462?w=1920&q=85')"></div>
+    <div class="hslide" style="background-image:url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1920&q=85')"></div>
+  </div>
+  <div class="hbody">
+    <div class="heyebrow"><span class="lbl">Est. 2010 &nbsp;·&nbsp; Lahore, Pakistan</span></div>
+    <h1 class="hh1">Experience<br>the Taste of<br><i>Flame Grill</i></h1>
+    <p class="hsub">Where ancient fire-cooking meets modern culinary artistry — every plate a masterpiece, every visit unforgettable.</p>
+    <div class="hcta">
+      <button class="btn bg" onclick="openModal()">Reserve a Table</button>
+      <a href="https://wa.me/923299047258" class="btn bgh" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order on WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="hdots">
+    <button class="hdot on" onclick="goSlide(0)"></button>
+    <button class="hdot" onclick="goSlide(1)"></button>
+    <button class="hdot" onclick="goSlide(2)"></button>
+  </div>
+  <div class="hstats">
+    <div class="hstat"><span class="n">14<em>+</em></span><span class="l">Years of Excellence</span></div>
+    <div class="hstat"><span class="n">4</span><span class="l">Michelin Stars</span></div>
+    <div class="hstat"><span class="n">50k<em>+</em></span><span class="l">Happy Guests</span></div>
+  </div>
+</section>
+
+<!-- SPECIALS -->
+<section id="specials">
+  <div class="wrap">
+    <div class="sphd" data-r>
+      <div>
+        <span class="lbl">Limited Time Offers</span>
+        <h2 class="t2">Today's <em>Special</em></h2>
+      </div>
+      <a href="https://wa.me/923299047258" class="btn bgh" target="_blank">Order via WhatsApp</a>
+    </div>
+    <div class="spgrid" data-sg>
+      <div class="spcard" onclick="openLb('https://images.unsplash.com/photo-1558030006-450675393462?w=1400&q=85','Grilled Ribeye Steak')">
+        <span class="spbadge">Save $5</span>
+        <div class="spimg"><img src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=80" alt="Ribeye" loading="lazy"></div>
+        <div class="spbody"><p class="spname">Grilled Ribeye Steak</p><p class="spdesc">28-day aged prime cut, herb butter, truffle fries</p><div class="spprices"><span class="spold">$22</span><span class="spsale">$17</span></div></div>
+      </div>
+      <div class="spcard" onclick="openLb('https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=1400&q=85','BBQ Chicken Platter')">
+        <span class="spbadge">Save $4</span>
+        <div class="spimg"><img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=600&q=80" alt="BBQ Chicken" loading="lazy"></div>
+        <div class="spbody"><p class="spname">BBQ Chicken Platter</p><p class="spdesc">Slow-smoked free-range chicken, house BBQ, grilled corn</p><div class="spprices"><span class="spold">$16</span><span class="spsale">$12</span></div></div>
+      </div>
+      <div class="spcard" onclick="openLb('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1400&q=85','Family Grill Combo')">
+        <span class="spbadge">Save $8</span>
+        <div class="spimg"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80" alt="Family Combo" loading="lazy"></div>
+        <div class="spbody"><p class="spname">Family Grill Combo</p><p class="spdesc">Ribs, chicken, sausages &amp; all the sides — feeds four</p><div class="spprices"><span class="spold">$38</span><span class="spsale">$30</span></div></div>
+      </div>
+      <div class="spcard" onclick="openLb('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1400&q=85','Margherita Pizza')">
+        <span class="spbadge">Save $2</span>
+        <div class="spimg"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Pizza" loading="lazy"></div>
+        <div class="spbody"><p class="spname">Margherita Pizza</p><p class="spdesc">Wood-fired, San Marzano tomato, buffalo mozzarella &amp; basil</p><div class="spprices"><span class="spold">$12</span><span class="spsale">$10</span></div></div>
+      </div>
+      <div class="spcard" onclick="openLb('https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=1400&q=85','Chocolate Lava Cake')">
+        <span class="spbadge">Save $2</span>
+        <div class="spimg"><img src="https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=600&q=80" alt="Lava Cake" loading="lazy"></div>
+        <div class="spbody"><p class="spname">Chocolate Lava Cake</p><p class="spdesc">Warm Valrhona 70%, vanilla bean ice cream, gold dust</p><div class="spprices"><span class="spold">$7</span><span class="spsale">$5</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="wrap">
+    <div data-r style="margin-bottom:clamp(32px,5vw,54px)">
+      <span class="lbl">Explore Our Cuisine</span>
+      <h2 class="t2">Our Full <em>Menu</em></h2>
+      <p class="body" style="margin-top:14px;max-width:480px">Crafted daily from the finest seasonal ingredients — each dish is a story of passion and precision.</p>
+    </div>
+    <div class="mtabs" data-r>
+      <button class="mtab on" onclick="showTab('st',this)">Starters</button>
+      <button class="mtab" onclick="showTab('mn',this)">Main Dishes</button>
+      <button class="mtab" onclick="showTab('ds',this)">Desserts</button>
+      <button class="mtab" onclick="showTab('dr',this)">Drinks</button>
+    </div>
+    <!-- Starters -->
+    <div id="tab-st" class="mgrid on" data-sg>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1541014741259-de529411b96a?w=1200&q=85','Flame-Seared Tuna')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=200&q=80" alt="Tuna" loading="lazy"></div><div class="miinfo"><p class="miname">Flame-Seared Tuna</p><p class="midesc">Sesame-crusted, avocado purée, pickled ginger, soy glaze</p><div class="mifoot"><span class="miprice">$14</span><a href="https://wa.me/923299047258?text=Order: Flame-Seared Tuna" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1506280754576-f6fa8a873550?w=1200&q=85','Garlic Prawn Skewers')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1506280754576-f6fa8a873550?w=200&q=80" alt="Prawns" loading="lazy"></div><div class="miinfo"><p class="miname">Garlic Prawn Skewers</p><p class="midesc">Jumbo prawns, garlic butter, lemon zest, fresh parsley</p><div class="mifoot"><span class="miprice">$16</span><a href="https://wa.me/923299047258?text=Order: Garlic Prawn Skewers" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=1200&q=85','Burrata & Heirloom Tomatoes')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=200&q=80" alt="Burrata" loading="lazy"></div><div class="miinfo"><p class="miname">Burrata &amp; Heirloom Tomatoes</p><p class="midesc">Fresh burrata, heritage tomatoes, aged balsamic, EVOO</p><div class="mifoot"><span class="miprice">$13</span><a href="https://wa.me/923299047258?text=Order: Burrata" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1547592180-85f173990554?w=1200&q=85','French Onion Soup')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=200&q=80" alt="Soup" loading="lazy"></div><div class="miinfo"><p class="miname">French Onion Soup</p><p class="midesc">Caramelized onion broth, Gruyère crouton, fresh thyme</p><div class="mifoot"><span class="miprice">$11</span><a href="https://wa.me/923299047258?text=Order: French Onion Soup" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1604909052743-94e838986d24?w=1200&q=85','Crispy Calamari')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1604909052743-94e838986d24?w=200&q=80" alt="Calamari" loading="lazy"></div><div class="miinfo"><p class="miname">Crispy Calamari</p><p class="midesc">Golden-fried squid rings, marinara sauce, lemon aioli</p><div class="mifoot"><span class="miprice">$12</span><a href="https://wa.me/923299047258?text=Order: Crispy Calamari" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=1200&q=85','Hummus & Flatbread')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&q=80" alt="Hummus" loading="lazy"></div><div class="miinfo"><p class="miname">Hummus &amp; Flatbread</p><p class="midesc">Creamy hummus, pomegranate seeds, smoked paprika, warm pita</p><div class="mifoot"><span class="miprice">$9</span><a href="https://wa.me/923299047258?text=Order: Hummus" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+    </div>
+    <!-- Mains -->
+    <div id="tab-mn" class="mgrid" data-sg>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1558030006-450675393462?w=1200&q=85','Grilled Ribeye')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1558030006-450675393462?w=200&q=80" alt="Ribeye" loading="lazy"></div><div class="miinfo"><p class="miname">Grilled Ribeye Steak</p><p class="midesc">28-day aged prime ribeye, truffle butter, roasted garlic mash</p><div class="mifoot"><span class="miprice">$42</span><a href="https://wa.me/923299047258?text=Order: Ribeye Steak" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&q=85','Herb-Crusted Lamb Rack')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=200&q=80" alt="Lamb" loading="lazy"></div><div class="miinfo"><p class="miname">Herb-Crusted Lamb Rack</p><p class="midesc">Rosemary &amp; Dijon crust, roasted root veg, red wine jus</p><div class="mifoot"><span class="miprice">$38</span><a href="https://wa.me/923299047258?text=Order: Lamb Rack" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1200&q=85','Atlantic Salmon')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=200&q=80" alt="Salmon" loading="lazy"></div><div class="miinfo"><p class="miname">Flame-Grilled Atlantic Salmon</p><p class="midesc">Lemon-dill crust, asparagus, caper butter sauce</p><div class="mifoot"><span class="miprice">$28</span><a href="https://wa.me/923299047258?text=Order: Salmon" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=1200&q=85','Spatchcock Chicken')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=200&q=80" alt="Chicken" loading="lazy"></div><div class="miinfo"><p class="miname">Spatchcock Grilled Chicken</p><p class="midesc">Free-range chicken, chimichurri, sweet potato fries</p><div class="mifoot"><span class="miprice">$24</span><a href="https://wa.me/923299047258?text=Order: Grilled Chicken" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200&q=85','BBQ Ribs')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=200&q=80" alt="Ribs" loading="lazy"></div><div class="miinfo"><p class="miname">Slow-Cooked BBQ Ribs</p><p class="midesc">12-hour smoked pork ribs, house BBQ, coleslaw, corn on the cob</p><div class="mifoot"><span class="miprice">$32</span><a href="https://wa.me/923299047258?text=Order: BBQ Ribs" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&q=85','Truffle Pizza')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&q=80" alt="Pizza" loading="lazy"></div><div class="miinfo"><p class="miname">Wood-Fired Truffle Pizza</p><p class="midesc">Black truffle, fontina, wild mushrooms, fresh rocket, truffle oil</p><div class="mifoot"><span class="miprice">$26</span><a href="https://wa.me/923299047258?text=Order: Truffle Pizza" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+    </div>
+    <!-- Desserts -->
+    <div id="tab-ds" class="mgrid" data-sg>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=1200&q=85','Chocolate Lava Cake')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=200&q=80" alt="Lava Cake" loading="lazy"></div><div class="miinfo"><p class="miname">Chocolate Lava Cake</p><p class="midesc">Warm Valrhona 70%, vanilla bean ice cream, edible gold</p><div class="mifoot"><span class="miprice">$9</span><a href="https://wa.me/923299047258?text=Order: Lava Cake" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1488477181946-6428a0291777?w=1200&q=85','Crème Brûlée')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&q=80" alt="Brulee" loading="lazy"></div><div class="miinfo"><p class="miname">Classic Crème Brûlée</p><p class="midesc">French vanilla custard, caramelized sugar crust, fresh berries</p><div class="mifoot"><span class="miprice">$8</span><a href="https://wa.me/923299047258?text=Order: Crème Brûlée" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1562440499-64c9a111f713?w=1200&q=85','Italian Tiramisu')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1562440499-64c9a111f713?w=200&q=80" alt="Tiramisu" loading="lazy"></div><div class="miinfo"><p class="miname">Italian Tiramisu</p><p class="midesc">Espresso-soaked ladyfingers, mascarpone cream, cocoa powder</p><div class="mifoot"><span class="miprice">$7</span><a href="https://wa.me/923299047258?text=Order: Tiramisu" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+    </div>
+    <!-- Drinks -->
+    <div id="tab-dr" class="mgrid" data-sg>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=1200&q=85','Signature Mocktail')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=200&q=80" alt="Mocktail" loading="lazy"></div><div class="miinfo"><p class="miname">Flame Signature Mocktail</p><p class="midesc">Passion fruit, mango, ginger beer, edible flower garnish</p><div class="mifoot"><span class="miprice">$7</span><a href="https://wa.me/923299047258?text=Order: Signature Mocktail" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=1200&q=85','Cold-Pressed Juice')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&q=80" alt="Juice" loading="lazy"></div><div class="miinfo"><p class="miname">Cold-Pressed Juices</p><p class="midesc">Daily seasonal selection — orange, beet, celery apple, watermelon mint</p><div class="mifoot"><span class="miprice">$6</span><a href="https://wa.me/923299047258?text=Order: Cold-Pressed Juice" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+      <div class="mi" onclick="openLb('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=85','Artisan Coffee')"><div class="mithumb"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=200&q=80" alt="Coffee" loading="lazy"></div><div class="miinfo"><p class="miname">Artisan Coffee</p><p class="midesc">Single-origin beans, espresso, pour-over &amp; cold brew</p><div class="mifoot"><span class="miprice">$5</span><a href="https://wa.me/923299047258?text=Order: Coffee" class="btn bsm" target="_blank" onclick="event.stopPropagation()">Order</a></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="teambg">CHEFS</div>
+  <div class="wrap">
+    <div data-r style="text-align:center;margin-bottom:clamp(48px,7vw,80px)">
+      <span class="lbl" style="justify-content:center">The Culinary Masters</span>
+      <h2 class="t2" style="margin-top:14px">Meet Our <em>Head Chefs</em></h2>
+      <p class="body" style="margin:14px auto 0;text-align:center;max-width:480px">World-class culinary artists dedicated to creating extraordinary dining experiences</p>
+    </div>
+    <div class="teamgrid" data-sg>
+      <div class="chef"><div class="chefframe"><img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=600&q=80" alt="Marco Rossetti" loading="lazy"></div><p class="chefnum">01 —</p><p class="chefname">Marco Rossetti</p><p class="chefrole">Executive Chef &amp; Founder</p><p class="chefbio">25 years across Rome, Paris and Dubai. Marco brings uncompromising Italian tradition and bold innovation to every plate.</p></div>
+      <div class="chef"><div class="chefframe"><img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=600&q=80" alt="Sofia Andrade" loading="lazy"></div><p class="chefnum">02 —</p><p class="chefname">Sofia Andrade</p><p class="chefrole">Head Grill Chef</p><p class="chefbio">Two-time Michelin Star recipient. Sofia's mastery over fire and flame is legendary — her grills are the cornerstone of our menu.</p></div>
+      <div class="chef"><div class="chefframe"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80" alt="James Thornton" loading="lazy"></div><p class="chefnum">03 —</p><p class="chefname">James Thornton</p><p class="chefrole">Pastry &amp; Desserts Chef</p><p class="chefbio">Le Cordon Bleu Paris graduate. James transforms the finest ingredients into architectural sweet masterpieces.</p></div>
+      <div class="chef"><div class="chefframe"><img src="https://images.unsplash.com/photo-1595257841889-eca2678454e2?w=600&q=80" alt="Aisha Nkosi" loading="lazy"></div><p class="chefnum">04 —</p><p class="chefname">Aisha Nkosi</p><p class="chefrole">Seafood &amp; Sauces Chef</p><p class="chefbio">Drawing from Cape Town's coastlines and classical French technique, Aisha's seafood dishes have become the stuff of legend.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="wrap">
+    <div data-r style="margin-bottom:clamp(40px,6vw,72px)">
+      <span class="lbl">Visual Feast</span>
+      <h2 class="t2" style="margin-top:14px">Food <em>Gallery</em></h2>
+    </div>
+    <div class="gmosaic" data-r="sc">
+      <div class="gi" onclick="openLb('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=85','Flame Grill — Dining Room')"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Dining" loading="lazy"><div class="giveil"><span class="giicon">⊕</span></div></div>
+      <div class="gi" onclick="openLb('https://images.unsplash.com/photo-1558030006-450675393462?w=1200&q=85','Premium Ribeye Steak')"><img src="https://images.unsplash.com/photo-1558030006-450675393462?w=500&q=80" alt="Ribeye" loading="lazy"><div class="giveil"><span class="giicon">⊕</span></div></div>
+      <div class="gi" onclick="openLb('https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&q=85','Grilled Meats')"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500&q=80" alt="Meats" loading="lazy"><div class="giveil"><span class="giicon">⊕</span></div></div>
+      <div class="gi" onclick="openLb('https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1200&q=85','Atlantic Salmon')"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&q=80" alt="Salmon" loading="lazy"><div class="giveil"><span class="giicon">⊕</span></div></div>
+      <div class="gi" onclick="openLb('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&q=85','Wood-Fired Pizza')"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700&q=80" alt="Pizza" loading="lazy"><div class="giveil"><span class="giicon">⊕</span></div></div>
+      <div class="gi" onclick="openLb('https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=1200&q=85','BBQ Chicken')"><img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=500&q=80" alt="Chicken" loading="lazy"><div class="giveil"><span class="giicon">⊕</span></div></div>
+      <div class="gi" onclick="openLb('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200&q=85','BBQ Platter')"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&q=80" alt="Platter" loading="lazy"><div class="giveil"><span class="giicon">⊕</span></div></div>
+      <div class="gi" onclick="openLb('https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=1200&q=85','Chocolate Lava Cake')"><img src="https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=500&q=80" alt="Cake" loading="lazy"><div class="giveil"><span class="giicon">⊕</span></div></div>
+      <div class="gi" onclick="openLb('https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=1200&q=85','Signature Mocktail')"><img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=500&q=80" alt="Mocktail" loading="lazy"><div class="giveil"><span class="giicon">⊕</span></div></div>
+      <div class="gi" onclick="openLb('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=85','Artisan Coffee')"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&q=80" alt="Coffee" loading="lazy"><div class="giveil"><span class="giicon">⊕</span></div></div>
+      <div class="gi" onclick="openLb('https://images.unsplash.com/photo-1547592180-85f173990554?w=1200&q=85','French Onion Soup')"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=500&q=80" alt="Soup" loading="lazy"><div class="giveil"><span class="giicon">⊕</span></div></div>
+      <div class="gi" onclick="openLb('https://images.unsplash.com/photo-1488477181946-6428a0291777?w=1200&q=85','Crème Brûlée')"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=500&q=80" alt="Brulee" loading="lazy"><div class="giveil"><span class="giicon">⊕</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="wrap">
+    <div data-r style="text-align:center;margin-bottom:clamp(48px,7vw,80px)">
+      <span class="lbl" style="justify-content:center">Guest Voices</span>
+      <h2 class="t2" style="margin-top:14px">What Our <em>Guests</em> Say</h2>
+    </div>
+    <div class="rvgrid" data-sg>
+      <div class="rv"><div class="rvstars">★★★★★</div><p class="rvq">"An absolutely transcendent dining experience. The Ribeye was cooked to absolute perfection — the kind of meal you dream about for weeks. Ambiance, service and food all deserve the highest praise."</p><div class="rva"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80" alt="Sarah" loading="lazy"><div><p class="rvaname">Sarah Mitchell</p><p class="rvarole">Food Critic — Gourmet Weekly</p></div></div></div>
+      <div class="rv"><div class="rvstars">★★★★★</div><p class="rvq">"We celebrated our anniversary here and it was nothing short of magical. Every detail was impeccable — Chef Marco personally greeted us. Truly world-class from first bite to last."</p><div class="rva"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="David" loading="lazy"><div><p class="rvaname">David &amp; Emma Chen</p><p class="rvarole">Regular Guests since 2015</p></div></div></div>
+      <div class="rv"><div class="rvstars">★★★★★</div><p class="rvq">"The Family Grill Combo was sensational — ribs falling off the bone, smoky and juicy chicken. I've been to restaurants all over the world and Flame Grill stands in a league of its own."</p><div class="rva"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=80" alt="Amara" loading="lazy"><div><p class="rvaname">Amara Okonkwo</p><p class="rvarole">Travel Blogger</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="ablayout">
+      <div class="abcollage" data-r="lx">
+        <div class="abimg" onclick="openLb('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=85','Our Restaurant Interior')"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Interior" loading="lazy"></div>
+        <div class="abimg" onclick="openLb('https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=1000&q=85','Chef at Work')"><img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&q=80" alt="Chef" loading="lazy"></div>
+        <div class="abimg" onclick="openLb('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1000&q=85','Our Signature Grill')"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80" alt="Grill" loading="lazy"></div>
+      </div>
+      <div data-r="rx">
+        <span class="lbl">Our Story</span>
+        <h2 class="t2" style="margin-top:16px;margin-bottom:20px">Passion Ignited,<br><em>Flavour Perfected</em></h2>
+        <p class="body">Founded in 2010 by Executive Chef Marco Rossetti, Flame Grill was born from a singular vision: to create a sanctuary where the ancient art of fire-cooking meets modern culinary excellence.</p>
+        <p class="body" style="margin-top:14px">We source only the finest ingredients — 28-day aged prime cuts, sustainably caught seafood, locally grown organic produce — and treat each with the respect it deserves. Every flame, every cut, every plate is an act of devotion.</p>
+        <div class="abstats">
+          <div class="astat"><div class="n">14<em>+</em></div><div class="l">Years of Excellence</div></div>
+          <div class="astat"><div class="n">4</div><div class="l">Michelin Stars</div></div>
+          <div class="astat"><div class="n">50k</div><div class="l">Happy Guests</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div data-r style="margin-bottom:clamp(48px,7vw,80px)">
+      <span class="lbl">Get In Touch</span>
+      <h2 class="t2" style="margin-top:14px">Reserve or <em>Contact Us</em></h2>
+      <p class="body" style="margin-top:14px;max-width:480px">Book a table, place an order, or simply say hello — our team is always ready to welcome you.</p>
+    </div>
+    <div class="clayout">
+      <div data-r="lx">
+        <div class="citem"><div class="cicon">📞</div><div><p class="clabel">Phone &amp; WhatsApp</p><p class="cval"><a href="tel:03299047258">03299047258</a> · <a href="https://wa.me/923299047258" target="_blank">Chat on WhatsApp</a></p></div></div>
+        <div class="citem"><div class="cicon">✉</div><div><p class="clabel">Email</p><p class="cval"><a href="mailto:aetheragency09@gmail.com">aetheragency09@gmail.com</a></p></div></div>
+        <div class="citem"><div class="cicon">📍</div><div><p class="clabel">Address</p><p class="cval">12 Grill Street, Gulberg III<br>Lahore, Pakistan</p></div></div>
+        <div class="citem"><div class="cicon">🕐</div><div><p class="clabel">Opening Hours</p><p class="cval">Mon – Fri: 12 pm – 11 pm<br>Sat – Sun: 11 am – 12 am</p></div></div>
+        <div class="mapbox"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3401.378!2d74.32864!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391904490d489249%3A0xbf7e68a7d2d25a7f!2sGulberg%20III%2C%20Lahore!5e0!3m2!1sen!2s!4v1695000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Location"></iframe></div>
+      </div>
+      <div data-r="rx">
+        <div class="formbox">
+          <span class="lbl" style="margin-bottom:10px">Make a Reservation</span>
+          <p class="t3" style="margin-top:10px;margin-bottom:6px">Reserve Your Table</p>
+          <p class="body" style="margin-bottom:28px">A dining experience like no other awaits.</p>
+          <div class="fgrow"><div class="fg"><label>Full Name</label><input type="text" placeholder="Your name"></div><div class="fg"><label>Phone</label><input type="tel" placeholder="Your number"></div></div>
+          <div class="fgrow"><div class="fg"><label>Date</label><input type="date"></div><div class="fg"><label>Time</label><input type="time"></div></div>
+          <div class="fg"><label>Guests</label><select><option>1 Guest</option><option selected>2 Guests</option><option>3 Guests</option><option>4 Guests</option><option>5–8 Guests</option><option>9+ (Private Event)</option></select></div>
+          <div class="fg"><label>Special Requests</label><textarea placeholder="Dietary requirements, occasions, seating preferences…"></textarea></div>
+          <button class="bsub" onclick="handleSubmit()">Confirm Reservation</button>
+          <p style="text-align:center;margin-top:16px;font-size:12px;color:var(--muted)">Or call us: <a href="tel:03299047258" style="color:var(--gold)">03299047258</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftmain">
+    <div><span class="ftlogo">Flame Grill</span><p class="ftdesc">Where fire meets flavour. Award-winning fine dining since 2010, crafting extraordinary culinary experiences with premium ingredients and master technique.</p><div class="ftsocials"><a href="#" class="ftsoc">Fb</a><a href="#" class="ftsoc">Ig</a><a href="https://wa.me/923299047258" class="ftsoc" target="_blank">Wa</a><a href="mailto:aetheragency09@gmail.com" class="ftsoc">@</a></div></div>
+    <div><p class="fth">Quick Links</p><ul class="ftlinks"><li><a href="#hero">Home</a></li><li><a href="#specials">Today's Specials</a></li><li><a href="#menu">Full Menu</a></li><li><a href="#team">Our Chefs</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#about">About Us</a></li></ul></div>
+    <div><p class="fth">The Menu</p><ul class="ftlinks"><li><a href="#menu" onclick="showTab('st',document.querySelectorAll('.mtab')[0])">Starters</a></li><li><a href="#menu" onclick="showTab('mn',document.querySelectorAll('.mtab')[1])">Main Dishes</a></li><li><a href="#menu" onclick="showTab('ds',document.querySelectorAll('.mtab')[2])">Desserts</a></li><li><a href="#menu" onclick="showTab('dr',document.querySelectorAll('.mtab')[3])">Drinks</a></li></ul></div>
+    <div><p class="fth">Contact</p><ul class="ftlinks"><li><a href="tel:03299047258">03299047258</a></li><li><a href="mailto:aetheragency09@gmail.com">aetheragency09@gmail.com</a></li><li><a href="#">Gulberg III, Lahore</a></li><li><a href="#" onclick="openModal()">Reserve a Table</a></li></ul></div>
+  </div>
+  <div class="ftbar"><p>© 2024 <span>Flame Grill Restaurant</span>. All rights reserved.</p><p>Crafted by <span>Aether Agency</span></p></div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lb"><div class="lbinner"><button class="lbclose" onclick="closeLb()">✕</button><img id="lbimg" src="" alt=""><p id="lbcap"></p></div></div>
+
+<!-- MODAL -->
+<div id="modal"><div class="mbox"><button class="mclose" onclick="closeModal()">✕</button><span class="lbl" style="margin-bottom:10px">Reservations</span><p class="t3" style="margin-top:10px;margin-bottom:6px">Reserve Your Table</p><p class="body" style="margin-bottom:28px">A dining experience like no other awaits you.</p><div class="fgrow"><div class="fg"><label>Name</label><input type="text" placeholder="Full name"></div><div class="fg"><label>Guests</label><select><option>2</option><option>3</option><option>4</option><option>5+</option></select></div></div><div class="fgrow"><div class="fg"><label>Date</label><input type="date"></div><div class="fg"><label>Time</label><input type="time"></div></div><div class="fg"><label>Phone / WhatsApp</label><input type="tel" placeholder="Your number"></div><button class="bsub" onclick="handleSubmit()">Confirm Reservation</button></div></div>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/923299047258" class="wafab" target="_blank" title="Order on WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<script>
+// NAV
+const navEl=document.getElementById('nav');
+window.addEventListener('scroll',()=>navEl.classList.toggle('st',scrollY>40),{passive:true});
+
+// DRAWER
+function toggleDrawer(){const d=document.getElementById('drawer'),h=document.getElementById('hbg'),s=document.getElementById('scrim');const op=d.classList.toggle('op');h.classList.toggle('op',op);s.classList.toggle('sh',op);document.body.style.overflow=op?'hidden':'';}
+function closeDrawer(){document.getElementById('drawer').classList.remove('op');document.getElementById('hbg').classList.remove('op');document.getElementById('scrim').classList.remove('sh');document.body.style.overflow='';}
+
+// HERO SLIDER
+let sl=0;
+const slides=document.querySelectorAll('.hslide'),dots=document.querySelectorAll('.hdot');
+function goSlide(n){slides[sl].classList.remove('on');dots[sl].classList.remove('on');sl=n;slides[sl].classList.add('on');dots[sl].classList.add('on');}
+setInterval(()=>goSlide((sl+1)%slides.length),5500);
+
+// MENU TABS
+function showTab(id,btn){
+  document.querySelectorAll('.mgrid').forEach(g=>g.classList.remove('on'));
+  document.querySelectorAll('.mtab').forEach(t=>t.classList.remove('on'));
+  const p=document.getElementById('tab-'+id);
+  p.classList.add('on');
+  if(btn)btn.classList.add('on');
+  // re-trigger stagger
+  const kids=[...p.querySelectorAll(':scope>.mi')];
+  kids.forEach((c,i)=>{c.style.opacity='0';c.style.transform='translateY(28px)';c.style.transition=`opacity .65s ${i*0.08+0.05}s cubic-bezier(0.16,1,0.3,1),transform .65s ${i*0.08+0.05}s cubic-bezier(0.16,1,0.3,1)`;});
+  requestAnimationFrame(()=>requestAnimationFrame(()=>kids.forEach(c=>{c.style.opacity='1';c.style.transform='none';})));
+}
+
+// LIGHTBOX
+function openLb(src,cap){document.getElementById('lbimg').src=src;document.getElementById('lbcap').textContent=cap||'';document.getElementById('lb').classList.add('sh');document.body.style.overflow='hidden';}
+function closeLb(){document.getElementById('lb').classList.remove('sh');document.body.style.overflow='';}
+document.getElementById('lb').addEventListener('click',e=>{if(e.target===e.currentTarget)closeLb();});
+
+// MODAL
+function openModal(){document.getElementById('modal').classList.add('sh');document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('modal').classList.remove('sh');document.body.style.overflow='';}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+
+function handleSubmit(){window.open('https://wa.me/923299047258?text='+encodeURIComponent('Hello Flame Grill! I\'d like to make a reservation.'),'_blank');closeModal();}
+
+// ESC
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLb();closeModal();closeDrawer();}});
+
+// SCROLL REVEAL
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);});
+},{threshold:0.07,rootMargin:'0px 0px -36px 0px'});
+document.querySelectorAll('[data-r],[data-sg]').forEach(el=>io.observe(el));
+
+// fire initial active menu tab stagger
+setTimeout(()=>{const ag=document.querySelector('.mgrid.on');if(ag)ag.classList.add('in');},150);
+</script>
+</body>
+</html>
